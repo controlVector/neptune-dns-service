@@ -4,6 +4,7 @@ import cors from '@fastify/cors'
 import helmet from '@fastify/helmet'
 
 import { mcpRoutes } from './mcp/routes'
+import { ContextService } from './services/ContextService'
 
 const PORT = parseInt(process.env.PORT || '3006')
 const HOST = process.env.HOST || '0.0.0.0'
@@ -76,6 +77,77 @@ async function buildServer() {
     timestamp: new Date().toISOString(),
     version: '1.0.0'
   }))
+
+  // Test Cloudflare connection endpoint
+  fastify.get('/api/v1/test-cloudflare', async (request, reply) => {
+    const axios = require('axios')
+    const contextService = new ContextService()
+    
+    try {
+      console.log(`[Neptune] Testing Cloudflare API connection...`)
+      
+      // Get credentials from Context Manager (or fallback to env vars)
+      const credentials = await contextService.getCloudflareCredentials()
+      
+      if (!credentials.cloudflare_api_token) {
+        return reply.code(400).send({ 
+          success: false, 
+          error: 'No Cloudflare API token configured',
+          message: 'Please configure Cloudflare credentials in onboarding or environment variables'
+        })
+      }
+
+      if (!credentials.cloudflare_account_id) {
+        return reply.code(400).send({ 
+          success: false, 
+          error: 'No Cloudflare Account ID configured',
+          message: 'Please configure Cloudflare Account ID in onboarding or environment variables'
+        })
+      }
+      
+      console.log(`[Neptune] Testing Cloudflare API with token: ${credentials.cloudflare_api_token.substring(0, 10)}...`)
+      console.log(`[Neptune] Using Account ID: ${credentials.cloudflare_account_id}`)
+      
+      // Call Cloudflare Account API to verify token
+      const response = await axios.get(`https://api.cloudflare.com/client/v4/accounts/${credentials.cloudflare_account_id}/tokens/verify`, {
+        headers: {
+          'Authorization': `Bearer ${credentials.cloudflare_api_token}`,
+          'Content-Type': 'application/json'
+        },
+        timeout: 10000
+      })
+      
+      console.log(`[Neptune] Cloudflare API response:`, response.data)
+      
+      return {
+        success: response.data.success,
+        cloudflare_api: 'connected',
+        token_valid: response.data.success,
+        token_status: response.data.result?.status || 'unknown',
+        account_id: credentials.cloudflare_account_id,
+        credential_source: credentials.cloudflare_api_token === process.env.CLOUDFLARE_API_TOKEN ? 'environment' : 'context_manager',
+        api_response: response.data
+      }
+    } catch (error: any) {
+      console.error(`[Neptune] Cloudflare API error:`, {
+        message: error.message,
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+        url: error.config?.url
+      })
+      
+      return reply.code(500).send({
+        success: false,
+        error: 'Cloudflare API connection failed',
+        details: error.message,
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        cloudflare_response: error.response?.data,
+        request_url: error.config?.url
+      })
+    }
+  })
 
   // MCP routes for DNS tool primitives
   await fastify.register(mcpRoutes, { prefix: '/api/v1' })
@@ -174,4 +246,4 @@ if (require.main === module) {
   start()
 }
 
-export { buildServer }
+export { buildServer }// restart

@@ -1,0 +1,210 @@
+
+> neptune@1.0.0 dev
+> nodemon src/index.ts
+
+[33m[nodemon] 3.1.10[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: ts,json[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+❌ Error starting Neptune server: Error: listen EADDRINUSE: address already in use 0.0.0.0:3006
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at node:net:2205:7
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 3006
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+{"level":30,"time":1756181047316,"pid":108780,"hostname":"Schmotzer_Surfa","msg":"Server listening at http://0.0.0.0:3006"}
+{"level":30,"time":1756181047317,"pid":108780,"hostname":"Schmotzer_Surfa","msg":"🌊 Neptune DNS Management Agent running on http://0.0.0.0:3006"}
+{"level":30,"time":1756181047317,"pid":108780,"hostname":"Schmotzer_Surfa","msg":"🌐 Ready to manage DNS operations!"}
+{"level":30,"time":1756181047318,"pid":108780,"hostname":"Schmotzer_Surfa","msg":"Environment configuration:"}
+{"level":30,"time":1756181047318,"pid":108780,"hostname":"Schmotzer_Surfa","msg":"- Node.js version: v24.1.0"}
+{"level":30,"time":1756181047318,"pid":108780,"hostname":"Schmotzer_Surfa","msg":"- Environment: development"}
+{"level":30,"time":1756181047318,"pid":108780,"hostname":"Schmotzer_Surfa","msg":"- Log level: info"}
+{"level":30,"time":1756181047318,"pid":108780,"hostname":"Schmotzer_Surfa","msg":"- Cloudflare: not configured"}
+{"level":30,"time":1756181047318,"pid":108780,"hostname":"Schmotzer_Surfa","msg":"- DigitalOcean: not configured"}
+{"level":30,"time":1756181047318,"pid":108780,"hostname":"Schmotzer_Surfa","msg":"- Route53: not configured"}
+{"level":40,"time":1756181047318,"pid":108780,"hostname":"Schmotzer_Surfa","msg":"⚠️  No DNS provider credentials configured."}
+{"level":30,"time":1756181047318,"pid":108780,"hostname":"Schmotzer_Surfa","msg":"💡 Neptune will still work for testing without real provider credentials."}
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+❌ Error starting Neptune server: Error: listen EADDRINUSE: address already in use 0.0.0.0:3006
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at node:net:2205:7
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 3006
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+{"level":30,"time":1756185231443,"pid":107936,"hostname":"Schmotzer_Surfa","msg":"Server listening at http://0.0.0.0:3006"}
+{"level":30,"time":1756185231445,"pid":107936,"hostname":"Schmotzer_Surfa","msg":"🌊 Neptune DNS Management Agent running on http://0.0.0.0:3006"}
+{"level":30,"time":1756185231445,"pid":107936,"hostname":"Schmotzer_Surfa","msg":"🌐 Ready to manage DNS operations!"}
+{"level":30,"time":1756185231445,"pid":107936,"hostname":"Schmotzer_Surfa","msg":"Environment configuration:"}
+{"level":30,"time":1756185231445,"pid":107936,"hostname":"Schmotzer_Surfa","msg":"- Node.js version: v24.1.0"}
+{"level":30,"time":1756185231445,"pid":107936,"hostname":"Schmotzer_Surfa","msg":"- Environment: development"}
+{"level":30,"time":1756185231445,"pid":107936,"hostname":"Schmotzer_Surfa","msg":"- Log level: info"}
+{"level":30,"time":1756185231445,"pid":107936,"hostname":"Schmotzer_Surfa","msg":"- Cloudflare: not configured"}
+{"level":30,"time":1756185231445,"pid":107936,"hostname":"Schmotzer_Surfa","msg":"- DigitalOcean: not configured"}
+{"level":30,"time":1756185231445,"pid":107936,"hostname":"Schmotzer_Surfa","msg":"- Route53: not configured"}
+{"level":40,"time":1756185231445,"pid":107936,"hostname":"Schmotzer_Surfa","msg":"⚠️  No DNS provider credentials configured."}
+{"level":30,"time":1756185231445,"pid":107936,"hostname":"Schmotzer_Surfa","msg":"💡 Neptune will still work for testing without real provider credentials."}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[01:35:39.945] [32mINFO[39m (116296): [36mServer listening at http://0.0.0.0:3006[39m
+[01:35:39.945] [32mINFO[39m (116296): [36m🌊 Neptune DNS Management Agent running on http://0.0.0.0:3006[39m
+[01:35:39.945] [32mINFO[39m (116296): [36m🌐 Ready to manage DNS operations![39m
+[01:35:39.945] [32mINFO[39m (116296): [36mEnvironment configuration:[39m
+[01:35:39.945] [32mINFO[39m (116296): [36m- Node.js version: v24.1.0[39m
+[01:35:39.945] [32mINFO[39m (116296): [36m- Environment: development[39m
+[01:35:39.945] [32mINFO[39m (116296): [36m- Log level: info[39m
+[01:35:39.945] [32mINFO[39m (116296): [36m- Cloudflare: configured[39m
+[01:35:39.945] [32mINFO[39m (116296): [36m- DigitalOcean: not configured[39m
+[01:35:39.945] [32mINFO[39m (116296): [36m- Route53: not configured[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+❌ Error starting Neptune server: Error: listen EADDRINUSE: address already in use 0.0.0.0:3006
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at node:net:2205:7
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 3006
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[01:37:26.036] [32mINFO[39m (95068): [36mServer listening at http://0.0.0.0:3006[39m
+[01:37:26.037] [32mINFO[39m (95068): [36m🌊 Neptune DNS Management Agent running on http://0.0.0.0:3006[39m
+[01:37:26.037] [32mINFO[39m (95068): [36m🌐 Ready to manage DNS operations![39m
+[01:37:26.037] [32mINFO[39m (95068): [36mEnvironment configuration:[39m
+[01:37:26.037] [32mINFO[39m (95068): [36m- Node.js version: v24.1.0[39m
+[01:37:26.037] [32mINFO[39m (95068): [36m- Environment: development[39m
+[01:37:26.037] [32mINFO[39m (95068): [36m- Log level: info[39m
+[01:37:26.037] [32mINFO[39m (95068): [36m- Cloudflare: configured[39m
+[01:37:26.037] [32mINFO[39m (95068): [36m- DigitalOcean: not configured[39m
+[01:37:26.037] [32mINFO[39m (95068): [36m- Route53: not configured[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+❌ Error starting Neptune server: Error: listen EADDRINUSE: address already in use 0.0.0.0:3006
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at node:net:2205:7
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 3006
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[01:40:14.819] [32mINFO[39m (133264): [36mServer listening at http://0.0.0.0:3006[39m
+[01:40:14.819] [32mINFO[39m (133264): [36m🌊 Neptune DNS Management Agent running on http://0.0.0.0:3006[39m
+[01:40:14.819] [32mINFO[39m (133264): [36m🌐 Ready to manage DNS operations![39m
+[01:40:14.819] [32mINFO[39m (133264): [36mEnvironment configuration:[39m
+[01:40:14.819] [32mINFO[39m (133264): [36m- Node.js version: v24.1.0[39m
+[01:40:14.819] [32mINFO[39m (133264): [36m- Environment: development[39m
+[01:40:14.819] [32mINFO[39m (133264): [36m- Log level: info[39m
+[01:40:14.819] [32mINFO[39m (133264): [36m- Cloudflare: configured[39m
+[01:40:14.819] [32mINFO[39m (133264): [36m- DigitalOcean: not configured[39m
+[01:40:14.819] [32mINFO[39m (133264): [36m- Route53: not configured[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[01:44:16.361] [32mINFO[39m (120760): [36mServer listening at http://0.0.0.0:3006[39m
+[01:44:16.361] [32mINFO[39m (120760): [36m🌊 Neptune DNS Management Agent running on http://0.0.0.0:3006[39m
+[01:44:16.361] [32mINFO[39m (120760): [36m🌐 Ready to manage DNS operations![39m
+[01:44:16.361] [32mINFO[39m (120760): [36mEnvironment configuration:[39m
+[01:44:16.361] [32mINFO[39m (120760): [36m- Node.js version: v24.1.0[39m
+[01:44:16.361] [32mINFO[39m (120760): [36m- Environment: development[39m
+[01:44:16.361] [32mINFO[39m (120760): [36m- Log level: info[39m
+[01:44:16.361] [32mINFO[39m (120760): [36m- Cloudflare: configured[39m
+[01:44:16.361] [32mINFO[39m (120760): [36m- DigitalOcean: not configured[39m
+[01:44:16.361] [32mINFO[39m (120760): [36m- Route53: not configured[39m
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[01:54:10.960] [32mINFO[39m (129692): [36mServer listening at http://0.0.0.0:3006[39m
+[01:54:10.960] [32mINFO[39m (129692): [36m🌊 Neptune DNS Management Agent running on http://0.0.0.0:3006[39m
+[01:54:10.960] [32mINFO[39m (129692): [36m🌐 Ready to manage DNS operations![39m
+[01:54:10.960] [32mINFO[39m (129692): [36mEnvironment configuration:[39m
+[01:54:10.960] [32mINFO[39m (129692): [36m- Node.js version: v24.1.0[39m
+[01:54:10.960] [32mINFO[39m (129692): [36m- Environment: development[39m
+[01:54:10.960] [32mINFO[39m (129692): [36m- Log level: info[39m
+[01:54:10.960] [32mINFO[39m (129692): [36m- Cloudflare: configured[39m
+[01:54:10.961] [32mINFO[39m (129692): [36m- DigitalOcean: not configured[39m
+[01:54:10.961] [32mINFO[39m (129692): [36m- Route53: not configured[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+❌ Error starting Neptune server: Error: listen EADDRINUSE: address already in use 0.0.0.0:3006
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at node:net:2205:7
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 3006
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[01:54:58.226] [32mINFO[39m (133708): [36mServer listening at http://0.0.0.0:3006[39m
+[01:54:58.227] [32mINFO[39m (133708): [36m🌊 Neptune DNS Management Agent running on http://0.0.0.0:3006[39m
+[01:54:58.227] [32mINFO[39m (133708): [36m🌐 Ready to manage DNS operations![39m
+[01:54:58.227] [32mINFO[39m (133708): [36mEnvironment configuration:[39m
+[01:54:58.227] [32mINFO[39m (133708): [36m- Node.js version: v24.1.0[39m
+[01:54:58.227] [32mINFO[39m (133708): [36m- Environment: development[39m
+[01:54:58.227] [32mINFO[39m (133708): [36m- Log level: info[39m
+[01:54:58.227] [32mINFO[39m (133708): [36m- Cloudflare: configured[39m
+[01:54:58.227] [32mINFO[39m (133708): [36m- DigitalOcean: not configured[39m
+[01:54:58.227] [32mINFO[39m (133708): [36m- Route53: not configured[39m
+[Neptune] Testing Cloudflare API connection...
+[Neptune ContextService] Retrieving Cloudflare credentials from Context Manager
+[Neptune ContextService] Requesting credential 'cloudflare_api_token'
+[Neptune ContextService] No Authorization header present - using development mode
+[Neptune ContextService] Failed to get credential cloudflare_api_token: 401 { error: 'Unauthorized' }
+[Neptune ContextService] Requesting credential 'cloudflare_account_id'
+[Neptune ContextService] No Authorization header present - using development mode
+[Neptune ContextService] Failed to get credential cloudflare_account_id: 401 { error: 'Unauthorized' }
+[Neptune ContextService] Requesting credential 'cloudflare_zone_id'
+[Neptune ContextService] No Authorization header present - using development mode
+[Neptune ContextService] Failed to get credential cloudflare_zone_id: 401 { error: 'Unauthorized' }
+[Neptune ContextService] Successfully retrieved credentials: { has_api_token: false, has_account_id: false, has_zone_id: false }
+[01:55:31.306] [32mINFO[39m (133708): [36mincoming request[39m
+    [35mreqId[39m: "req-1"
+    [35mreq[39m: {
+      "method": "GET",
+      "url": "/api/v1/test-cloudflare",
+      "hostname": "localhost:3006",
+      "remoteAddress": "127.0.0.1",
+      "remotePort": 62940
+    }
+[01:55:31.405] [32mINFO[39m (133708): [36mrequest completed[39m
+    [35mreqId[39m: "req-1"
+    [35mres[39m: {
+      "statusCode": 400
+    }
+    [35mresponseTime[39m: 97.60479998588562
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m

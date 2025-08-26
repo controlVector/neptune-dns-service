@@ -47,10 +47,42 @@ export async function mcpRoutes(fastify: FastifyInstance) {
     try {
       const body = MCPToolCallSchema.parse(request.body)
       
-      const result = await neptuneMCPServer.callTool(body.name, body.arguments)
+      // Extract JWT token from Authorization header
+      const authHeader = request.headers.authorization
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        reply.code(401).send({
+          success: false,
+          error: 'Authorization required',
+          message: 'Bearer token required in Authorization header'
+        })
+        return
+      }
+      
+      const jwtToken = authHeader.substring(7) // Remove 'Bearer ' prefix
+      
+      // Inject JWT token into tool arguments
+      const argumentsWithAuth = {
+        ...body.arguments,
+        jwt_token: jwtToken
+      }
+      
+      const result = await neptuneMCPServer.callTool(body.name, argumentsWithAuth)
       
       if (result.isError) {
-        reply.code(400).send({
+        // Preserve original status code from DNS provider errors
+        let statusCode = 400 // Default fallback
+        if (result.content && result.content[0] && result.content[0].text) {
+          const errorText = result.content[0].text
+          if (errorText.includes('Zone not found') || errorText.includes('404')) {
+            statusCode = 404
+          } else if (errorText.includes('401') || errorText.includes('unauthorized')) {
+            statusCode = 401
+          } else if (errorText.includes('500') || errorText.includes('Internal Server Error')) {
+            statusCode = 500
+          }
+        }
+        
+        reply.code(statusCode).send({
           success: false,
           error: 'Tool execution failed',
           result: result,
@@ -80,10 +112,28 @@ export async function mcpRoutes(fastify: FastifyInstance) {
         calls: z.array(MCPToolCallSchema).min(1).max(10).describe("Array of MCP tool calls to execute")
       }).parse(request.body)
       
+      // Extract JWT token from Authorization header
+      const authHeader = request.headers.authorization
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        reply.code(401).send({
+          success: false,
+          error: 'Authorization required',
+          message: 'Bearer token required in Authorization header'
+        })
+        return
+      }
+      
+      const jwtToken = authHeader.substring(7) // Remove 'Bearer ' prefix
+      
       const results = await Promise.all(
         body.calls.map(async (call) => {
           try {
-            const result = await neptuneMCPServer.callTool(call.name, call.arguments)
+            // Inject JWT token into each call's arguments
+            const argumentsWithAuth = {
+              ...call.arguments,
+              jwt_token: jwtToken
+            }
+            const result = await neptuneMCPServer.callTool(call.name, argumentsWithAuth)
             return {
               tool_name: call.name,
               success: !result.isError,
