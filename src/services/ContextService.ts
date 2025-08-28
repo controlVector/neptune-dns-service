@@ -26,6 +26,16 @@ export class ContextService {
    * Get Cloudflare credentials from Context Manager
    */
   async getCloudflareCredentials(jwtToken?: string): Promise<CloudflareCredentials> {
+    // First check if we should use environment variables in development mode
+    if (process.env.NODE_ENV === 'development' && !jwtToken) {
+      console.log('[Neptune ContextService] Development mode detected - using environment variables')
+      return {
+        cloudflare_api_token: process.env.CLOUDFLARE_API_TOKEN,
+        cloudflare_account_id: process.env.CLOUDFLARE_ACCOUNT_ID,
+        cloudflare_zone_id: process.env.CLOUDFLARE_ZONE_ID
+      }
+    }
+
     try {
       const headers: any = {}
       if (jwtToken) {
@@ -45,17 +55,28 @@ export class ContextService {
       // Get optional Zone ID
       credentials.cloudflare_zone_id = await this.getCredential('cloudflare_zone_id', headers)
 
-      console.log('[Neptune ContextService] Successfully retrieved credentials:', {
+      console.log('[Neptune ContextService] Retrieved from Context Manager:', {
         has_api_token: !!credentials.cloudflare_api_token,
         has_account_id: !!credentials.cloudflare_account_id,
         has_zone_id: !!credentials.cloudflare_zone_id
       })
+
+      // If none of the credentials were retrieved, fallback to environment variables
+      if (!credentials.cloudflare_api_token && !credentials.cloudflare_account_id) {
+        console.log('[Neptune ContextService] No credentials retrieved from Context Manager - falling back to environment variables')
+        return {
+          cloudflare_api_token: process.env.CLOUDFLARE_API_TOKEN,
+          cloudflare_account_id: process.env.CLOUDFLARE_ACCOUNT_ID,
+          cloudflare_zone_id: process.env.CLOUDFLARE_ZONE_ID
+        }
+      }
 
       return credentials
     } catch (error) {
       console.error('[Neptune ContextService] Failed to get Cloudflare credentials:', error)
       
       // Fallback to environment variables
+      console.log('[Neptune ContextService] Exception occurred - falling back to environment variables')
       return {
         cloudflare_api_token: process.env.CLOUDFLARE_API_TOKEN,
         cloudflare_account_id: process.env.CLOUDFLARE_ACCOUNT_ID,

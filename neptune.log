@@ -208,3 +208,106 @@
     }
     [35mresponseTime[39m: 97.60479998588562
 [31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[08:39:56.157] [32mINFO[39m (124364): [36mServer listening at http://0.0.0.0:3006[39m
+[08:39:56.158] [32mINFO[39m (124364): [36m🌊 Neptune DNS Management Agent running on http://0.0.0.0:3006[39m
+[08:39:56.158] [32mINFO[39m (124364): [36m🌐 Ready to manage DNS operations![39m
+[08:39:56.158] [32mINFO[39m (124364): [36mEnvironment configuration:[39m
+[08:39:56.158] [32mINFO[39m (124364): [36m- Node.js version: v24.1.0[39m
+[08:39:56.158] [32mINFO[39m (124364): [36m- Environment: development[39m
+[08:39:56.158] [32mINFO[39m (124364): [36m- Log level: info[39m
+[08:39:56.158] [32mINFO[39m (124364): [36m- Cloudflare: configured[39m
+[08:39:56.158] [32mINFO[39m (124364): [36m- DigitalOcean: not configured[39m
+[08:39:56.158] [32mINFO[39m (124364): [36m- Route53: not configured[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+❌ Error starting Neptune server: Error: listen EADDRINUSE: address already in use 0.0.0.0:3006
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at node:net:2205:7
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 3006
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+[08:41:21.570] [32mINFO[39m (102528): [36mServer listening at http://0.0.0.0:3006[39m
+[08:41:21.571] [32mINFO[39m (102528): [36m🌊 Neptune DNS Management Agent running on http://0.0.0.0:3006[39m
+[08:41:21.571] [32mINFO[39m (102528): [36m🌐 Ready to manage DNS operations![39m
+[08:41:21.571] [32mINFO[39m (102528): [36mEnvironment configuration:[39m
+[08:41:21.571] [32mINFO[39m (102528): [36m- Node.js version: v24.1.0[39m
+[08:41:21.571] [32mINFO[39m (102528): [36m- Environment: development[39m
+[08:41:21.571] [32mINFO[39m (102528): [36m- Log level: info[39m
+[08:41:21.571] [32mINFO[39m (102528): [36m- Cloudflare: configured[39m
+[08:41:21.571] [32mINFO[39m (102528): [36m- DigitalOcean: not configured[39m
+[08:41:21.571] [32mINFO[39m (102528): [36m- Route53: not configured[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+C:\Users\jwsch\Documents\controlVector\Github\core-services\neptune\node_modules\ts-node\src\index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: ⨯ Unable to compile TypeScript:
+src/mcp/server.ts(68,29): error TS2339: Property 'executeDomainSetup' does not exist on type 'NeptuneMCPServer'.
+src/mcp/server.ts(71,29): error TS2339: Property 'executeSSLSetup' does not exist on type 'NeptuneMCPServer'.
+src/mcp/server.ts(74,29): error TS2339: Property 'executeDomainVerification' does not exist on type 'NeptuneMCPServer'.
+
+    at createTSError (C:\Users\jwsch\Documents\controlVector\Github\core-services\neptune\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Users\jwsch\Documents\controlVector\Github\core-services\neptune\node_modules\ts-node\src\index.ts:863:19)
+    at getOutput (C:\Users\jwsch\Documents\controlVector\Github\core-services\neptune\node_modules\ts-node\src\index.ts:1077:36)
+    at Object.compile (C:\Users\jwsch\Documents\controlVector\Github\core-services\neptune\node_modules\ts-node\src\index.ts:1433:41)
+    at Module.m._compile (C:\Users\jwsch\Documents\controlVector\Github\core-services\neptune\node_modules\ts-node\src\index.ts:1617:30)
+    at loadTS (node:internal/modules/cjs/loader:1826:10)
+    at Object.require.extensions.<computed> [as .ts] (C:\Users\jwsch\Documents\controlVector\Github\core-services\neptune\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1469:32)
+    at Module._load (node:internal/modules/cjs/loader:1286:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:322:14) {
+  diagnosticCodes: [ 2339, 2339, 2339 ]
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+❌ Error starting Neptune server: Error: listen EADDRINUSE: address already in use 0.0.0.0:3006
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at node:net:2205:7
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 3006
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+❌ Error starting Neptune server: Error: listen EADDRINUSE: address already in use 0.0.0.0:3006
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at node:net:2205:7
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 3006
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m
+[32m[nodemon] restarting due to changes...[39m
+[32m[nodemon] starting `ts-node src/index.ts`[39m
+❌ Error starting Neptune server: Error: listen EADDRINUSE: address already in use 0.0.0.0:3006
+    at Server.setupListenHandle [as _listen2] (node:net:1939:16)
+    at listenInCluster (node:net:1996:12)
+    at node:net:2205:7
+    at processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '0.0.0.0',
+  port: 3006
+}
+[31m[nodemon] app crashed - waiting for file changes before starting...[39m

@@ -180,6 +180,12 @@ export class CloudflareDNSProvider implements DNSProvider {
    */
   private async getZoneId(domain: string): Promise<string> {
     try {
+      // First check if we have a zone ID in environment variables (for development)
+      if (process.env.NODE_ENV === 'development' && process.env.CLOUDFLARE_ZONE_ID) {
+        console.log(`[Cloudflare DNS] Using zone ID from environment: ${process.env.CLOUDFLARE_ZONE_ID}`)
+        return process.env.CLOUDFLARE_ZONE_ID
+      }
+
       // Extract root domain from subdomain (e.g., "api.example.com" -> "example.com")
       const rootDomain = this.extractRootDomain(domain)
       console.log(`[Cloudflare DNS] Searching for zone ID for domain: ${domain} (root: ${rootDomain})`)
@@ -209,6 +215,13 @@ export class CloudflareDNSProvider implements DNSProvider {
           if (allZonesResponse.data.success && allZonesResponse.data.result) {
             const allZoneNames = allZonesResponse.data.result.map((zone: any) => zone.name)
             console.log(`[Cloudflare DNS] Available zones in account: ${allZoneNames.join(', ')}`)
+            
+            // If we find the zone in the all zones list, use it
+            const foundZone = allZonesResponse.data.result.find((zone: any) => zone.name === rootDomain)
+            if (foundZone) {
+              console.log(`[Cloudflare DNS] Found zone in full list: ${foundZone.id}`)
+              return foundZone.id
+            }
           }
         } catch (debugError) {
           console.error(`[Cloudflare DNS] Could not list zones for debugging:`, debugError)
@@ -226,6 +239,12 @@ export class CloudflareDNSProvider implements DNSProvider {
         status: error.response?.status,
         data: error.response?.data
       })
+      
+      // If in development and we have a zone ID, fallback to it
+      if (process.env.NODE_ENV === 'development' && process.env.CLOUDFLARE_ZONE_ID) {
+        console.log(`[Cloudflare DNS] Falling back to environment zone ID: ${process.env.CLOUDFLARE_ZONE_ID}`)
+        return process.env.CLOUDFLARE_ZONE_ID
+      }
       
       throw new DNSProviderError(
         `Failed to get zone ID for ${domain}: ${error.message}`,

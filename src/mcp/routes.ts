@@ -49,21 +49,35 @@ export async function mcpRoutes(fastify: FastifyInstance) {
       
       // Extract JWT token from Authorization header
       const authHeader = request.headers.authorization
-      if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        reply.code(401).send({
-          success: false,
-          error: 'Authorization required',
-          message: 'Bearer token required in Authorization header'
-        })
-        return
-      }
-      
-      const jwtToken = authHeader.substring(7) // Remove 'Bearer ' prefix
-      
-      // Inject JWT token into tool arguments
-      const argumentsWithAuth = {
-        ...body.arguments,
-        jwt_token: jwtToken
+      let jwtToken = 'dev-mode'
+      let argumentsWithAuth = body.arguments
+
+      if (process.env.NODE_ENV === 'development') {
+        // Development mode: provide default values if missing
+        argumentsWithAuth = {
+          ...body.arguments,
+          jwt_token: 'dev-mode',
+          workspace_id: body.arguments?.workspace_id || 'dev-workspace',
+          user_id: body.arguments?.user_id || 'dev-user'
+        }
+      } else {
+        // Production mode: require authorization
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+          reply.code(401).send({
+            success: false,
+            error: 'Authorization required',
+            message: 'Bearer token required in Authorization header'
+          })
+          return
+        }
+        
+        jwtToken = authHeader.substring(7) // Remove 'Bearer ' prefix
+        
+        // Inject JWT token into tool arguments
+        argumentsWithAuth = {
+          ...body.arguments,
+          jwt_token: jwtToken
+        }
       }
       
       const result = await neptuneMCPServer.callTool(body.name, argumentsWithAuth)
@@ -114,16 +128,21 @@ export async function mcpRoutes(fastify: FastifyInstance) {
       
       // Extract JWT token from Authorization header
       const authHeader = request.headers.authorization
-      if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        reply.code(401).send({
-          success: false,
-          error: 'Authorization required',
-          message: 'Bearer token required in Authorization header'
-        })
-        return
+      let jwtToken = 'dev-mode'
+
+      if (process.env.NODE_ENV !== 'development') {
+        // Production mode: require authorization
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+          reply.code(401).send({
+            success: false,
+            error: 'Authorization required',
+            message: 'Bearer token required in Authorization header'
+          })
+          return
+        }
+        
+        jwtToken = authHeader.substring(7) // Remove 'Bearer ' prefix
       }
-      
-      const jwtToken = authHeader.substring(7) // Remove 'Bearer ' prefix
       
       const results = await Promise.all(
         body.calls.map(async (call) => {

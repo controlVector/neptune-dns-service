@@ -5,11 +5,14 @@
 import axios from 'axios'
 import { DNSProvider, DNSRecord, DNSRecordResult, DNSProviderError } from './DNSProvider'
 import { CloudflareDNSProvider } from './CloudflareDNSProvider'
+import { AdaptiveCloudflareProvider } from './AdaptiveCloudflareProvider'
+import { AIAssistedDNSProvider } from './AIAssistedDNSProvider'
 import { DigitalOceanDNSProvider } from './DigitalOceanDNSProvider'
 
 export class DNSService {
   private providers: Map<string, DNSProvider> = new Map()
   private contextManagerUrl: string
+  private useAdaptiveMode: boolean = true
 
   constructor(contextManagerUrl = 'http://localhost:3002') {
     this.contextManagerUrl = contextManagerUrl
@@ -19,6 +22,24 @@ export class DNSService {
    * Get DNS provider credentials from Context Manager
    */
   private async getProviderCredentials(provider: string, jwtToken: string): Promise<string> {
+    // Development mode: use environment variables when JWT token is 'dev-mode'
+    if (process.env.NODE_ENV === 'development' && jwtToken === 'dev-mode') {
+      console.log(`[DNS Service] Development mode - using environment variables for ${provider}`)
+      const envVarName = `${provider.toUpperCase()}_API_TOKEN`
+      const envToken = process.env[envVarName]
+      
+      if (envToken) {
+        console.log(`[DNS Service] Found ${provider} token in environment variables`)
+        return envToken
+      } else {
+        throw new DNSProviderError(
+          `No ${provider} API token found in environment variables (${envVarName})`,
+          400,
+          provider
+        )
+      }
+    }
+
     try {
       console.log(`[DNS Service] Retrieving ${provider} credentials from Context Manager`)
       console.log(`[DNS Service] Context Manager URL: ${this.contextManagerUrl}`)
@@ -48,6 +69,18 @@ export class DNSService {
         data: error.response?.data,
         url: `${this.contextManagerUrl}/api/v1/context/secret/credential/${provider}_api_token`
       })
+
+      // Fallback to environment variables if Context Manager fails
+      if (process.env.NODE_ENV === 'development') {
+        const envVarName = `${provider.toUpperCase()}_API_TOKEN`
+        const envToken = process.env[envVarName]
+        
+        if (envToken) {
+          console.log(`[DNS Service] Falling back to environment variable ${envVarName}`)
+          return envToken
+        }
+      }
+      
       throw new DNSProviderError(
         `Failed to retrieve ${provider} credentials: ${error.response?.data?.message || error.message}`,
         error.response?.status || 500,
@@ -71,7 +104,24 @@ export class DNSService {
     switch (provider.toLowerCase()) {
       case 'cloudflare':
         const cfToken = await this.getProviderCredentials('cloudflare', jwtToken)
-        dnsProvider = new CloudflareDNSProvider(cfToken)
+        
+        // Prioritize AI-assisted provider for maximum intelligence
+        if (process.env.USE_AI_DNS === 'true' || process.env.NODE_ENV === 'development') {
+          console.log('[DNS Service] Using AI-Assisted Cloudflare Provider for intelligent problem solving')
+          dnsProvider = new AIAssistedDNSProvider(cfToken, {
+            accountId: process.env.CLOUDFLARE_ACCOUNT_ID,
+            zoneId: process.env.CLOUDFLARE_ZONE_ID
+          })
+        } else if (this.useAdaptiveMode) {
+          console.log('[DNS Service] Using Adaptive Cloudflare Provider for intelligent DNS management')
+          dnsProvider = new AdaptiveCloudflareProvider(cfToken, {
+            accountId: process.env.CLOUDFLARE_ACCOUNT_ID,
+            zoneId: process.env.CLOUDFLARE_ZONE_ID,
+            debug: process.env.NODE_ENV === 'development'
+          })
+        } else {
+          dnsProvider = new CloudflareDNSProvider(cfToken)
+        }
         break
       
       case 'digitalocean':
